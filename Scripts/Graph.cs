@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Graph
+public class Graph : IGraph
 {
-    List<Connection> mConnections;
+    protected List<Connection> mConnections;
 
-    // an array of connections outgoing from the given node
     public List<Connection> getConnections(Node fromNode)
     {
         List<Connection> connections = new List<Connection>();
@@ -22,13 +20,14 @@ public class Graph
 
     public void Build()
     {
-        // find all nodes in scene
-        // iterate over the nodes
-        //   create connection objects,
-        //   stuff them in mConnections
         mConnections = new List<Connection>();
 
         Node[] nodes = GameObject.FindObjectsOfType<Node>();
+        GetCost(nodes);
+    }
+
+    public virtual void GetCost(Node[] nodes)
+    {
         foreach (Node fromNode in nodes)
         {
             foreach (Node toNode in fromNode.ConnectsTo)

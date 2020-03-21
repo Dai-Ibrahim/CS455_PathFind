@@ -56,6 +56,7 @@ public class Kinematic : MonoBehaviour
                 //lookwg = new LookWhereGoing();
                 lookwg.character = this;
                 lookwg.target = newTarget;
+				newGraph = new enemy();
                 newGraph.Build();
                 List<Connection> path = Dijkstra.pathfind(newGraph, start, goal);
                 // path is a list of connections - convert this to gameobjects for the FollowPath steering behavior
